@@ -98,6 +98,9 @@ const Signup = () => {
               <button type="button" className="btn btn-primary" onClick={handleSubmit}>Submit</button>              
                   <ToastContainer />
                   </div>
+
+                
+
         </div>
     </div>
     </>

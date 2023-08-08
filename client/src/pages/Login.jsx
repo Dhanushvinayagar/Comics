@@ -16,8 +16,10 @@ const Login = () => {
 
   const [userName,setUserName] = useState("")
   const [password,setPassword] = useState("")
+  const [displayPassword,setdisplayPassword]=useState(false)
+
   const [cookies,setCookies]=useCookies()
-  console.log("auth",window.localStorage.getItem("auth_token"),cookies);
+
   const navigate =useNavigate()
   
   const handleUsername = (e) =>{
@@ -26,7 +28,9 @@ const Login = () => {
     const handlePassword = (e) =>{
       setPassword(e.target.value)
     }
-    
+    const showPassword = (displayPassword) =>{
+            setdisplayPassword(displayPassword)
+    }
     const handleSubmit = async(e) =>{
       e.preventDefault();
 
@@ -85,19 +89,26 @@ const Login = () => {
                 <div className="row gx-6">
                   <div className="col">
                       <div className="form-floating">
-                        <input type="password" className="form-control border border-primary-subtle" id="floatingPassword" placeholder="Password" onChange={(e)=>handlePassword(e)}/>
+                        <input type={!displayPassword ? "password" : "text"} className="form-control border border-primary-subtle" id="floatingPassword" placeholder="Password" onChange={(e)=>handlePassword(e)}/>
                         <label htmlFor="floatingPassword">Password</label>
                       </div>
                   </div>
-
                 </div>
-              </div><br></br>
+              </div>
+              <br></br>
+              <div className="container p-1">
+                        <input type="checkbox" className='border border-primary-subtle' onChange={(e)=>showPassword(!displayPassword)}/>
+                        <label htmlFor="showPassword" className='px-2'>Show Password</label>
+              </div>
+              
               <button type="button" className="btn btn-primary p" onClick={handleSubmit}>Submit</button>  
               <br></br>            
         <div className='container px-4 text-left m-1 p-2 bg-dark-subtle' onClick={notify}>
            Create a new account :  <Link to="/signup">Signup</Link>
         <ToastContainer />
         </div>
+        
+        
 
         </div>
     </div>
